@@ -1,0 +1,62 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body{
+	/*background-color: white;*/
+}
+
+.social{
+	position: fixed;
+	top: 0;
+	height: 75px;
+	/*border:1px solid blue;*/
+	right: 0;
+	z-index: 10;
+}
+
+.facebook { 
+	width: 100px; 
+	margin: 10px;
+	/*border: 1px solid red; */
+	float: left;
+}
+
+.twitter{
+	width: 100px; 
+	margin: 10px;
+	/*border: 1px solid yellow; */
+	float: left;
+}
+
+.holder{
+  margin:0 auto;
+}
+
+.post{
+	width:400px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.post img{
+	max-width: 100%;
+	max-height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
