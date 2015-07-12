@@ -4835,7 +4835,7 @@ app = {
             if (app.settings.scroll) {
                 return;
             }
-            if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
+            if($(window).scrollTop() + $(window).height() == app.getDocHeight()) {
                 console.log("----------- bottom hit ---------------")
                 app.settings.scroll = true;
                 console.log(app.settings.after);
@@ -4847,6 +4847,15 @@ app = {
             }
         });
 
+    },
+
+    getDocHeight:function(){
+        var D = document;
+        return Math.max(
+            D.body.scrollHeight, D.documentElement.scrollHeight,
+            D.body.offsetHeight, D.documentElement.offsetHeight,
+            D.body.clientHeight, D.documentElement.clientHeight
+        );
     },
 
     getPosts:function(){
