@@ -1,7 +1,10 @@
 
 (function(){
 
-    var $container=$('.holder');
+    var $container = $('.holder');
+    var preloader = $('.loader');
+
+    window.preloader = preloader;
 
     var _posts;
 
@@ -28,25 +31,24 @@
             // insert new posts
 
             var url = app.settings.baseURL;
-            console.log(url)
+            // console.log(url)
             app.getData(url, function(data){
-                console.log(data.data);
                 app.settings.after = data.data.after;
-                console.log('saved after ' , app.settings.after);
+                // console.log('saved after ' , app.settings.after);
                 _posts = data.data.children;
                 app.layoutPosts(_posts);
             });
 
             $(window).scroll(function () { 
-                console.log('scroll');
                 if (app.settings.scroll) {
                     return;
                 }
                 if($(window).scrollTop() + $(window).height() == app.getDocHeight()) {
-                    console.log("----------- bottom hit ---------------")
+                    console.log("----------- bottom hit ---------------", preloader)
                     app.settings.scroll = true;
-                    console.log(app.settings.after);
+                    preloader.fadeIn();
                     app.getPosts();
+                    
                 }
             });
 
@@ -63,12 +65,12 @@
 
         getPosts:function(){
             //this just gets posts with a pass param or not and then returns these posts
-            console.log('getting more posts / next' + app.settings.after)
+            // console.log('getting more posts / next' + app.settings.after)
             var url = app.settings.baseURL + '?after=' + app.settings.after;
-            console.log(url)
+            // console.log(url)
             
             app.getData(url, function(data){
-                console.log(data.data);
+                // console.log(data.data);
                 app.settings.after = data.data.after;
                 _posts = data.data.children;
                 app.insertNewPosts(_posts);
@@ -77,7 +79,7 @@
 
         makeBlocks:function(posts){
             app.settings.posts = '';
-            console.log('making blocks' , posts);
+            // console.log('making blocks' , posts);
 
             $.each(posts, function(index, val) {
                  /* iterate through array or object */
@@ -85,15 +87,13 @@
                     
                     console.log(posts[index].data.url)
                     if( !(posts[index].data.url.indexOf('.webm') === -1) ) {
-                       console.log('videos');
+                       // console.log('videos');
                        app.settings.posts += '<div class="post" ><video src="'+posts[index].data.url+'" autoplay loop> </video></div>';
                     
                     } else {
-                       console.log('image');    
+                       // console.log('image');    
                        app.settings.posts += '<div class="post" ><img src='+posts[index].data.url.replace(/.jpg/i, "l.jpg")+' > </div>';
-                    }
-                    
-                    // app.settings.posts += '<div class="post" style="background:url('+posts[index].data.url.replace(/.jpg/i, "l.jpg")+') " </div>';
+                    }                    
                 }
             });
             return app.settings.posts;
@@ -101,7 +101,7 @@
 
         layoutPosts:function(posts){
 
-            console.log(posts);
+            // console.log(posts);
 
             var result = app.makeBlocks(_posts);
             var $blocks = $(result);
@@ -115,7 +115,7 @@
             
             imgLoad.on( 'progress', function( instance, image ) {
               var result = image.isLoaded ? 'loaded' : 'broken';
-              console.log( 'image is ' + result + ' for ' + image.img.src );
+              // console.log( 'image is ' + result + ' for ' + image.img.src );
               $container.append(image);
 
               $container.isotope({
@@ -128,6 +128,7 @@
                 }
               });
               $blocks.css('opacity', 1);
+
             });
 
             app.settings.scroll = false;
@@ -135,19 +136,26 @@
 
         // when new posts are added to an existing cotianer
         insertNewPosts:function(posts){
-            //console.log(posts);
-            console.log(posts);
+            // console.log(posts);
+            // console.log(posts);
             var $moreBlocks = $(app.makeBlocks(_posts));
-            
 
             var imgLoad = imagesLoaded( $container );
             
             $moreBlocks.css('opacity', 0);
+
             $container.append($moreBlocks).imagesLoaded( function() {
+            
                 $container.isotope( 'appended', $moreBlocks );
+            
                 $moreBlocks.css('opacity', 1);
+            
+                app.settings.scroll = false;    
             });
-            app.settings.scroll = false;
+            
+            
+
+            preloader.fadeOut();
         },
 
         getData:function(path, callback){

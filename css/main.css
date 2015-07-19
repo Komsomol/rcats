@@ -3,32 +3,32 @@
    ========================================================================== */
 
 body{
-	background-image: url('/img/food.png');
+	background-image: url('../img/food.png');
 }
 
 .social{
-	position: fixed;
-	top: 0;
-	height: 75px;
-	/*border:1px solid blue;*/
-	right: 0;
-	z-index: 10;
+  position: fixed;
+  top: 5px;
+  height: 75px;
+  right: 5px;
+  z-index: 10;
 }
 
 .facebook { 
-	width: 100px; 
-	margin: 10px;
+	/*width: 100px; */
+	margin-right: 10px;
 	float: left;
 }
 
 .twitter{
-	width: 100px; 
-	margin: 10px;
+	/*width: 100px; */
+	/*margin: 10px;*/
 	float: left;
 }
 
 .holder{
-  margin:0 auto;
+	padding-top: 10px;
+  	margin:0 auto;
 }
 
 .post{
@@ -53,7 +53,16 @@ body{
 	border-radius: 5px;
 }
 
-
+.loader{
+	/*bottom: 0px;*/
+	width: 150px;
+	height: 150px;
+	/*border:1px solid red;*/
+	z-index: 10;
+	left:45%;
+	position: absolute;
+	/*opacity: 0;*/
+}
 
 
 
