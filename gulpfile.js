@@ -18,7 +18,7 @@ gulp.task('concatScripts', function() {
   		'js/vendor/jquery-1.11.0.min.js', 
   		'js/vendor/bootstrap.min.js', 
   		'js/vendor/imagesloaded.pkgd.js', 
-  		'js/vendor/isotope.pkgd.js',
+      'js/vendor/isotope.pkgd.js',
   		'js/main.js', ])
     .pipe(maps.init())
     .pipe(concat('all.js'))

@@ -1,11 +1,9 @@
-
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
 
 body{
-	/*background-color: white;*/
+	background-image: url('/img/food.png');
 }
 
 .social{
@@ -20,30 +18,31 @@ body{
 .facebook { 
 	width: 100px; 
 	margin: 10px;
-	/*border: 1px solid red; */
 	float: left;
 }
 
 .twitter{
 	width: 100px; 
 	margin: 10px;
-	/*border: 1px solid yellow; */
 	float: left;
 }
 
 .holder{
   margin:0 auto;
+  height: auto;
+  width:80%;
 }
 
 .post{
-	width:400px;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .post img{
 	max-width: 100%;
 	max-height: auto;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 
