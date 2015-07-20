@@ -44,7 +44,7 @@
                     return;
                 }
                 if($(window).scrollTop() + $(window).height() == app.getDocHeight()) {
-                    console.log("----------- bottom hit ---------------", preloader)
+                    console.log("----------- bottom hit ---------------");
                     app.settings.scroll = true;
                     preloader.fadeIn();
                     app.getPosts();
@@ -81,12 +81,36 @@
             app.settings.posts = '';
             // console.log('making blocks' , posts);
 
+            var imgurl;
+
             $.each(posts, function(index, val) {
                  /* iterate through array or object */
+
+                 if(posts[index].data.domain=='imgur.com'){
+                    // console.log('imugr ', posts[index].data);
+
+
+                    console.log(posts[index].data.url);
+                    if((posts[index].data.url.split("/"))[3] === 'a'){
+                        console.log("rejected /a/ === ",posts[index].data.url);
+                        return;
+                    } else if ((posts[index].data.url.split("/"))[3] === 'gallery'){
+                        console.log("rejected /gallery/ ===",posts[index].data.url);
+                        return;
+                    } else if ((posts[index].data.url.split("/"))[3] === 'r'){
+                        console.log("rejected /r/ ===",posts[index].data.url);
+                        return;
+                    } else {
+                        imgurl = "http://i.imgur.com/"+ (posts[index].data.url.split("/"))[3] +".jpg";
+                        app.settings.posts += '<div class="post" ><img src='+imgurl+' > </div>';
+                    }
+                 }
+
+
                  if(posts[index].data.domain=='i.imgur.com'){
                     
-                    console.log(posts[index].data.url)
-                    if( !(posts[index].data.url.indexOf('.webm') === -1) ) {
+                    // console.log(posts[index].data.url);
+                    if( (posts[index].data.url.indexOf('.webm') === -1) === false ) {
                        // console.log('videos');
                        app.settings.posts += '<div class="post" ><video src="'+posts[index].data.url+'" autoplay loop> </video></div>';
                     
