@@ -4962,13 +4962,13 @@ if ( typeof define === 'function' && define.amd ) {
 
             var imgLoad = imagesLoaded( $container );
             
-            $moreBlocks.css('opacity', 0);
+            // $moreBlocks.css('opacity', 0);
 
             $container.append($moreBlocks).imagesLoaded( function() {
             
                 $container.isotope( 'appended', $moreBlocks );
             
-                $moreBlocks.css('opacity', 1);
+                // $moreBlocks.css('opacity', 1);
             
                 app.settings.scroll = false;    
             });
@@ -4980,17 +4980,21 @@ if ( typeof define === 'function' && define.amd ) {
 
         getData:function(path, callback){
             // console.log('I am here');
-            $.when($.ajax({
+            $.ajax({
                 url: path,
                 type: 'GET',
                 crossDomain: true,
                 dataType:'json',
-            }).done(function(data) {
-            }).fail(function() {
-                alert('Error from API - Please Try Again Later');
-            }).always(function() {
-            }))
-            // on AJAX finish
+            })
+            
+            .done(function(data) {
+                console.log('data call complete');
+            })
+            
+            .fail(function(error) {
+                alert('error ', error);
+            })
+
             .then(function(data){
                 callback(data);
             });
